@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
-const multer = require("multer");
 const cors = require('cors');
 const { register, login } = require("../controllers/authController");
 const { getReports, createReport } = require("../controllers/reportController");
@@ -10,7 +9,6 @@ const jwtMiddleware = require("../middlewares/jwtMiddleware");
 
 
 const app = express();
-const upload = multer({ dest: "uploads/" });
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -23,7 +21,7 @@ app.post("/auth/register", register);
 app.post("/auth/login", login);
 
 app.get("/reports", getReports);
-app.post("/reports", jwtMiddleware, upload.single("photo"), createReport);
+app.post("/reports", jwtMiddleware, createReport);
 
 app.get("/message", getMessage);
 app.post("/message", postMessage);
