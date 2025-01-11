@@ -16,6 +16,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
+app.get("/", (req, res) => {
+    res.send("Hello World");
+})
 app.post("/auth/register", register);
 app.post("/auth/login", login);
 
